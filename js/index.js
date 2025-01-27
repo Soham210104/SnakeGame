@@ -51,7 +51,6 @@ function gameEngine(){
     scoreBox.innerHTML = "Score: 0";
     snakeArr = [{x: 13, y: 15}];
     food = {x: 6, y: 7};
-    // musicSound.play();
     score = 0;
     highScoreBox.innerHTML = "High Score: " + highScoreVal;
   }
@@ -132,34 +131,44 @@ else{
 
 window.requestAnimationFrame(main);
 window.addEventListener('keydown', e =>{
-    inputDir = {x: 0, y: 1}; //Start the game 
-    moveSound.play();
-    switch(e.key){
-      case "ArrowUp":
-        // console.log("ArrowUp");
-        inputDir.x = 0;
-        inputDir.y = -1;  //-1 because the origin in js starts from top left corner of the box.
-        break;
-
-      case "ArrowDown":
-        // console.log("ArrowDown");
-        inputDir.x = 0;
-        inputDir.y = 1;
-        break;
-
-      case "ArrowLeft":
-        // console.log("ArrowLeft");
-        inputDir.x = -1;
-        inputDir.y = 0;
-        break;
-
-      case "ArrowRight":
-        // console.log("ArrowRight");'
-        inputDir.x = 1;
-        inputDir.y = 0;
-        break;
-
-      default:
-        break;
+    let isStart = false;
+    if(e.key === "ArrowUp" || e.key === "ArrowDown" || e.key === "ArrowLeft" || e.key === "ArrowRight"){
+      isStart = true;
+      inputDir = {x: 0, y: 1}; //Start the game 
+      moveSound.play();
+      if (!musicSound.playing) {
+        musicSound.play();
+      }
     }
+    if(isStart){
+      switch(e.key){
+        case "ArrowUp":
+          // console.log("ArrowUp");
+          inputDir.x = 0;
+          inputDir.y = -1;  //-1 because the origin in js starts from top left corner of the box.
+          break;
+  
+        case "ArrowDown":
+          // console.log("ArrowDown");
+          inputDir.x = 0;
+          inputDir.y = 1;
+          break;
+  
+        case "ArrowLeft":
+          // console.log("ArrowLeft");
+          inputDir.x = -1;
+          inputDir.y = 0;
+          break;
+  
+        case "ArrowRight":
+          // console.log("ArrowRight");'
+          inputDir.x = 1;
+          inputDir.y = 0;
+          break;
+  
+        default:
+          break;
+      }
+    }
+    
 });
