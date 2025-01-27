@@ -1,0 +1,182 @@
+# GAME LOGIC
+
+snakeArray contains the position of head or object so whenever the snake will eat food the obect will get added to the tail of the snake
+meaning the new x,y will be getting added in the snakeArray.Thus,we have made use of snakeArray for each.
+
+----------------------------------------------------------------------------------------------------------------------------------------------------
+../img/bg.jpg:
+
+Meaning: This goes one directory up from the current file's location and then into the img folder to find the bg.jpg file.
+Usage: Use this when the img folder is located in the parent directory of the current file.
+Example:
+
+Current file is at /project/styles/style.css
+Path points to /project/img/bg.jpg
+./img/bg.jpg:
+
+Meaning: This stays in the current directory and looks for the img folder.
+Usage: Use this when the img folder is in the same directory as the current file.
+Example:
+
+Current file is at /project/styles/style.css
+Path points to /project/styles/img/bg.jpg
+
+-------------------------------------------------------------------------------------------------------------------------------------------------
+
+The minimum between vh and vw is called vmin
+The maximum between vh and vw is called vmax
+
+--------------------------------------------------------------------------------------------------------------------------------------------------
+
+#SET INTERVAL
+
+setInterval is a JavaScript function that repeatedly executes a given function or code after a specified time interval.
+
+SYNTAX :- setInterval(function, delay);
+function: The code to run repeatedly.
+delay: Time in milliseconds between each execution.
+
+EXAMPLE :-
+setInterval(() => {
+  console.log("Hello, world!");
+}, 1000);
+
+This logs Hello, World every 1 second.
+
+
+EXAMPLE 2:-
+let intervalId;
+
+// Start the interval
+function startInterval() {
+  intervalId = setInterval(() => {
+    console.log("Hello, world!");
+  }, 1000); // Runs every 1 second
+}
+
+// Stop the interval
+function stopInterval() {
+  clearInterval(intervalId); // Stops the interval
+}
+
+// Example usage
+startInterval(); // Call to start
+setTimeout(stopInterval, 5000); // Stops after 5 seconds
+
+---------------------------------------------------------------------------------------------------------------------------------------------------
+
+#window.requestAnimationFrame(main)
+
+A method used in JavaScript to schedule the main function (or any callback) to run before the next screen repaint.
+It tells the browser: "Run this function (main) just before the next frame is rendered."
+This makes animations smooth because it matches the screen's refresh rate, usually 60 FPS (frames per second).
+
+Example:- 
+
+let animationId;
+
+function main() {
+  console.log("Frame rendered");
+  animationId = window.requestAnimationFrame(main); // Keeps running
+}
+
+// Start the animation
+window.requestAnimationFrame(main);
+
+// Stop the animation after 5 seconds
+setTimeout(() => {
+  cancelAnimationFrame(animationId); // Stops it
+  console.log("Animation stopped");
+}, 5000);
+
+
+DIFFERENCE BETWEEN requestAnimationFrame and setInterval
+1) Synchronization with Screen Refresh
+    a)requestAnimationFrame: Automatically syncs with the screen’s refresh rate (typically 60 FPS). This ensures smooth, flicker-free animations.
+    b)setInterval: Executes at a fixed interval (e.g., every 16ms for ~60 FPS) but doesn't align perfectly with the refresh rate, which can lead to stuttering.
+
+2)Resource Efficiency
+    a)requestAnimationFrame: Pauses automatically when the user switches tabs or minimizes the browser, saving system resources.
+    b)setInterval: Keeps running regardless of tab visibility, consuming more CPU and battery.
+
+3)Use Case
+    a)requestAnimationFrame: Best for animations, games, or anything tied to rendering graphics.
+    b)setInterval: Best for non-rendering tasks like updating data periodically or background jobs.
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# PURPOSE OF ctime - lastTime
+
+By subtracting lastPaintTime from ctime, you can check how much time has passed since the last update (frame) was processed. 
+This is useful for controlling the speed of updates or animations in your game.
+
+You use this value to ensure that updates or game logic (like movement or animations) happen at a certain rate 
+(e.g., the movement speed or frame rate of the game), and not faster than what your game’s logic is designed for.
+
+What Would Happen Without (ctime - lastPaintTime):
+If you didn't use (ctime - lastPaintTime) to manage time, your main function would keep updating every time main() is called, 
+potentially faster than intended. This would happen because requestAnimationFrame(main) triggers on every available screen refresh (typically 60Hz), 
+so the game update would happen too fast, exceeding the expected FPS.
+
+If speed = 5 (5 FPS), but the game logic tries to update at 60 FPS, things like movement and animations could seem janky or too fast.
+
+By using (ctime - lastPaintTime), you ensure that the game state is updated at a consistent, controlled rate. 
+This avoids updates happening too quickly or too slowly, providing smoother gameplay.
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# Difference between document.addEventListener and window.addEventListener
+
+1)document.addEventListener
+    Target: Listens for events on the HTML document (the DOM).
+    Usage: Used for events happening inside the page (e.g., clicks, key presses, form inputs).
+
+    Example:- 
+    document.addEventListener("keydown", (event) => {
+    console.log(`Key pressed: ${event.key}`);
+});
+
+
+2)window.addEventListener
+   Target: Listens for events on the browser window (the entire viewport).
+   Usage: Used for global or window-related events (e.g., resize, scroll, focus).
+
+   Example:-
+   window.addEventListener("resize", () => {
+    console.log("Window was resized!");
+});
+
+->Use document for user interactions inside the page.
+->Use window for monitoring browser-level changes.
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# Unshift
+
+Example
+let numbers = [2, 3, 4];
+
+// Add elements 0 and 1 to the beginning
+let newLength = numbers.unshift(0, 1);
+
+console.log(numbers);      // Output: [0, 1, 2, 3, 4]
+console.log(newLength);    // Output: 5
+
+
+It modifies the original array by adding elements at the start.
+Returns the new length of the array.
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# Why to use {...snakeArr[i]} instead of just snakeArr[i]
+
+If you write snakeArr[i + 1] = snakeArr[i], you are simply copying the reference to snakeArr[i] into snakeArr[i + 1].
+This means both snakeArr[i] and snakeArr[i + 1] will refer to the same object (same memory location).
+
+So when you modify one, the other will also change because they are pointing to the same object. 
+For instance, if you later modify snakeArr[i + 1], it would also change snakeArr[i] because both arrays are referencing the same position object.
+
+The { ...snakeArr[i] } creates a new object with the same values, but it doesn't share the same reference.
+This means each snake body part in snakeArr gets its own independent copy, and changes to one part don't affect the others.

@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&family=Varela+Round&display=swap');
+
+
+*{
+  padding: 0;
+  margin: 0;
+}
+
+.body{
+  background: url("../img/bg.jpg")  no-repeat center center fixed;
+  min-height: 100vh;
+  background-size: 100vw 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#board{
+  background: linear-gradient(#5D8736,#F4FFC3);
+  height: 92vmin;
+  width: 90vmin;
+  border: 2px solid #000;
+  display: grid;
+  grid-template-rows: repeat(18,1fr);
+  grid-template-columns: repeat(18,1fr);
+}
+
+.head{
+  background: linear-gradient(blue,lightblue);
+  border: 2px solid purple;
+  transform: scale(1.02);
+  border-radius: 9px;
+}
+.snake{
+  background-color: green;
+  border: .25vmin solid white;
+  border-radius: 12px;
+}
+.food{
+  background:linear-gradient(red,orange);
+  border: .25vmin solid black;
+  border-radius: 34px;
+}
+
+#scoreBox{
+  position: absolute;
+  top: 9px;
+  right: 200px;
+  font-family: "Titillium Web", serif;
+  font-size: 39px;
+  font-weight: bold;
+}
+
+#highScoreBox{
+  position: absolute;
+  top: 60px;
+  right: 112px;
+  font-family: "Titillium Web", serif;
+  font-size: 39px;
+  font-weight: bold;
+}
